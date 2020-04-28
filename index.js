@@ -21,10 +21,11 @@ const Config = require('./lib/Config');
  *                             Format is a filename -> tree as list lookup table
  * @param {Array} [options.nonExistent] - List of partials that do not exist
  * @param {Boolean} [options.isListForm=false]
+ * @param {Boolean} [options.noTypeDefinitions=false]
  * @param {String|Object} [options.tsConfig] Path to a typescript config (or a preloaded one).
  * @return {Object}
  */
-module.exports = function(options) {
+module.exports = function (options) {
   const config = new Config(options);
 
   if (!fs.existsSync(config.filename)) {
@@ -66,7 +67,7 @@ module.exports = function(options) {
  *
  * Params are those of module.exports
  */
-module.exports.toList = function(options) {
+module.exports.toList = function (options) {
   options.isListForm = true;
 
   return module.exports(options);
@@ -80,7 +81,7 @@ module.exports.toList = function(options) {
  * @param  {Config} config
  * @return {Array}
  */
-module.exports._getDependencies = function(config) {
+module.exports._getDependencies = function (config) {
   let dependencies;
   const precinctOptions = config.detectiveConfig;
   precinctOptions.includeCore = false;
@@ -109,7 +110,8 @@ module.exports._getDependencies = function(config) {
       config: config.requireConfig,
       webpackConfig: config.webpackConfig,
       nodeModulesConfig: config.nodeModulesConfig,
-      tsConfig: config.tsConfig
+      tsConfig: config.tsConfig,
+      noTypeDefinitions: config.noTypeDefinitions
     });
 
     if (!result) {
@@ -156,7 +158,7 @@ function traverse(config) {
   if (config.filter) {
     debug('using filter function to filter out dependencies');
     debug('unfiltered number of dependencies: ' + dependencies.length);
-    dependencies = dependencies.filter(function(filePath) {
+    dependencies = dependencies.filter(function (filePath) {
       return config.filter(filePath, config.filename);
     });
     debug('filtered number of dependencies: ' + dependencies.length);
