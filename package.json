@@ -42,7 +42,7 @@
     "debug": "^4.1.1",
     "filing-cabinet": "^2.5.1",
     "precinct": "^6.2.0",
-    "typescript": "^3.7.5"
+    "typescript": "3.8.2"
   },
   "devDependencies": {
     "@babel/cli": "^7.2.3",

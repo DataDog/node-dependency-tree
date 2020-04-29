@@ -106,10 +106,10 @@ module.exports._getDependencies = function (config) {
       partial: dep,
       filename: config.filename,
       directory: config.directory,
-      ast: precinct.ast,
-      config: config.requireConfig,
+      // ast: precinct.ast,
+      // config: config.requireConfig,
       webpackConfig: config.webpackConfig,
-      nodeModulesConfig: config.nodeModulesConfig,
+      // nodeModulesConfig: config.nodeModulesConfig,
       tsConfig: config.tsConfig,
       noTypeDefinitions: config.noTypeDefinitions
     });
